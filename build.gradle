@@ -10,13 +10,21 @@ subprojects {
 
   dependencies {
     testCompile 'junit:junit:4.12'
+    testCompile 'org.assertj:assertj-core:3.5.2'
   }  
 }
 
 project(':app-api') {
+  dependencies {
+    compile project(':domain')
+  }
 }
 
 project(':app-impl') {
+  dependencies {
+    compile project(':app-api')
+    compile project(':domain')
+  }
 }
 
 project(':domain') {
