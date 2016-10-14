@@ -24,9 +24,22 @@ project(':app-impl') {
   dependencies {
     compile project(':app-api')
     compile project(':domain')
+    testCompile project(path:':domain', configuration:'testOutput')
   }
 }
 
 project(':domain') {
+  task jarTest (type: Jar) {
+    from sourceSets.test.output
+    classifier = 'test'
+  }
+
+  configurations {
+    testOutput
+  }
+
+  artifacts {
+    testOutput jarTest
+  }
 }
 
