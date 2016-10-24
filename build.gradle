@@ -25,6 +25,7 @@ project(':app-impl') {
     compile project(':app-api')
     compile project(':domain')
     testCompile project(path:':domain', configuration:'testOutput')
+    testCompile 'org.mockito:mockito-all:1.10.19'
   }
 }
 
@@ -47,7 +48,7 @@ project(':jpa-adapter') {
   dependencies {
     compileOnly 'javax:javaee-web-api:7.0'
     compile project(':app-api')
-    runtime 'org.hibernate:hibernate-core:5.2.3.Final'
+    testCompile 'org.hibernate:hibernate-core:5.2.3.Final'
     testCompile 'org.liquibase:liquibase-core:3.5.0'
     testCompile 'commons-beanutils:commons-beanutils:1.9.2'
     testCompile 'org.hamcrest:hamcrest-all:1.3'
