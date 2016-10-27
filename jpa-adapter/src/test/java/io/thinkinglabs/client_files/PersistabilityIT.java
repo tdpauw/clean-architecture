@@ -14,6 +14,7 @@ import javax.persistence.PersistenceException;
 import java.util.Arrays;
 import java.util.List;
 
+import static io.thinkinglabs.client_files.client.PersistedClientBuilder.johnDoe;
 import static org.junit.Assert.assertThat;
 
 @Entity(name = "client")
@@ -25,7 +26,7 @@ public class PersistabilityIT {
     final public DatabaseMigrationRule databaseMigration = new DatabaseMigrationRule(entityManager, transactor);
     final List<? extends Builder<?>> persistentObjectBuilders =
             Arrays.asList(
-                    PersistedClientBuilder.johnDoe()
+                    johnDoe()
             );
 
 
