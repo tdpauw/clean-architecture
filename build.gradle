@@ -48,6 +48,7 @@ project(':jpa-adapter') {
   dependencies {
     compileOnly 'javax:javaee-web-api:7.0'
     compile project(':app-api')
+    testCompile project(path:':domain', configuration:'testOutput')
     testCompile 'org.hibernate:hibernate-core:5.2.3.Final'
     testCompile 'org.liquibase:liquibase-core:3.5.0'
     testCompile 'commons-beanutils:commons-beanutils:1.9.2'
