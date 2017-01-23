@@ -2,5 +2,6 @@ include 'app-api'
 include 'app-impl'
 include 'domain'
 include 'jpa-adapter'
+include 'acceptance-tests'
 
 rootProject.name = 'clean-architecture'

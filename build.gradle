@@ -56,3 +56,10 @@ project(':jpa-adapter') {
     testRuntime 'org.hsqldb:hsqldb:2.3.4'
   }
 }
+
+project(':acceptance-tests') {
+  dependencies {
+    compile 'org.seleniumhq.selenium:selenium-java:2.52.0'
+    compile 'org.seleniumhq.selenium:selenium-htmlunit-driver:2.52.0'
+  }
+}
