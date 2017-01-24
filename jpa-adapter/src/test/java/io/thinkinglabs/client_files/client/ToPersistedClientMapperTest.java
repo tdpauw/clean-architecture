@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TranslateToClientTest {
-
-    private final TranslateToPersistedClient sut = new TranslateToPersistedClient();
+public class ToPersistedClientMapperTest
+{
+    private final ToPersistedClientMapper sut = new ToPersistedClientMapper();
 
     @Test
-    public void translateFromDomainToPersistentObject() {
+    public void fromDomainToPersistentObject() {
         assertThat(sut.from(ClientBuilder.johnDoe().build())).isEqualToComparingFieldByField(PersistedClientBuilder.johnDoe().build());
     }
 }

@@ -5,9 +5,9 @@ import javax.persistence.EntityManager;
 public class PersistedClientBase implements ClientBase {
 
     private final EntityManager entityManager;
-    private TranslateToPersistedClient translateToDomain;
+    private ToPersistedClientMapper translateToDomain;
 
-    public PersistedClientBase(EntityManager entityManager, final TranslateToPersistedClient translateToDomain) {
+    public PersistedClientBase(EntityManager entityManager, final ToPersistedClientMapper translateToDomain) {
 
         this.entityManager = entityManager;
         this.translateToDomain = translateToDomain;
