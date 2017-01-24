@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static io.thinkinglabs.client_files.client.ClientBuilder.aDefaultClient;
 import static io.thinkinglabs.client_files.client.ClientBuilder.johnDoe;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.refEq;

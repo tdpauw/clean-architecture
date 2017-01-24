@@ -16,7 +16,7 @@ public class PersistedClientBaseTest {
 
     final EntityManager entityManager = Persistence.createEntityManagerFactory(TestConstants.PERSISTENCE_UNIT_NAME).createEntityManager();
     final Transactor transactor = new JPATransactor(entityManager);
-    final PersistedClientBase sut = new PersistedClientBase(entityManager);
+    final PersistedClientBase sut = new PersistedClientBase(entityManager, new TranslateToPersistedClient());
 
     @Rule
     final public DatabaseMigrationRule databaseMigration = new DatabaseMigrationRule(entityManager, transactor);
