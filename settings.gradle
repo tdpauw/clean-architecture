@@ -3,5 +3,7 @@ include 'app-impl'
 include 'domain'
 include 'jpa-adapter'
 include 'acceptance-tests'
+include 'infra-rest-webbit'
 
 rootProject.name = 'clean-architecture'
+
