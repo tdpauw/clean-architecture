@@ -23,7 +23,7 @@ public class ClientHandler implements HttpHandler
     {
         if ("POST".equals(request.method()))
         {
-            final DefaultCreateClient createClient = new DefaultCreateClient(new PersistedClientBase(emf.createEntityManager(), translateToDomain));
+            final DefaultCreateClient createClient = new DefaultCreateClient(new PersistedClientBase(emf.createEntityManager(), new ToPersistedClientMapper()));
             createClient.createClient(new CreateClientCommand("firstname", "lastname"));
         }
         else

@@ -14,4 +14,7 @@
       <column name="lastname" type="varchar(50)"/>
     </createTable>
   </changeSet>
+  <changeSet id="create-client-sequence" author="Thierry dP">
+    <createSequence sequenceName="client_seq" incrementBy="50" cycle="false" startValue="50"/>
+  </changeSet>
 </databaseChangeLog>
