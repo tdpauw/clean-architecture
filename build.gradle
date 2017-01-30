@@ -67,6 +67,17 @@ project(':infra-rest-webbit') {
   }
 }
 
+project(':infra-rest-vertx') {
+  dependencies {
+    compileOnly 'javax:javaee-web-api:7.0'
+    compile project(':app-impl')
+    compile project(':jpa-adapter')
+    compile 'io.vertx:vertx-core:3.3.3'
+    runtime 'org.hibernate:hibernate-core:5.2.3.Final'
+    testCompile 'io.vertx:vertx-unit:3.3.3'
+  }
+}
+
 project(':acceptance-tests') {
   dependencies {
     compile 'org.seleniumhq.selenium:selenium-java:2.52.0'

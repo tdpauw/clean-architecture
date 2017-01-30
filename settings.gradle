@@ -4,6 +4,6 @@ include 'domain'
 include 'jpa-adapter'
 include 'acceptance-tests'
 include 'infra-rest-webbit'
+include 'infra-rest-vertx'
 
 rootProject.name = 'clean-architecture'
-
