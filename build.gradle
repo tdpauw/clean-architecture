@@ -73,6 +73,7 @@ project(':infra-rest-vertx') {
     compile project(':app-impl')
     compile project(':jpa-adapter')
     compile 'io.vertx:vertx-core:3.3.3'
+    compile 'io.vertx:vertx-web:3.3.3'
     runtime 'org.hibernate:hibernate-core:5.2.3.Final'
     testCompile 'io.vertx:vertx-unit:3.3.3'
   }
