@@ -15,7 +15,7 @@ public class ServerVerticle extends AbstractVerticle
     public void start(final Future<Void> future) throws Exception
     {
         Router router = Router.router(vertx);
-        router.route("/").handler(routingContext -> {
+        router.get("/").handler(routingContext -> {
             HttpServerResponse response = routingContext.response();
             response.putHeader("content-type", "text/html")
                     .end("<h1>Hello from my first " +
