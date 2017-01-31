@@ -24,6 +24,7 @@ public class PersistabilityIT {
 
     @Rule
     final public DatabaseMigrationRule databaseMigration = new DatabaseMigrationRule(entityManager, transactor);
+
     final List<? extends Builder<?>> persistentObjectBuilders =
             Arrays.asList(
                     johnDoe()
