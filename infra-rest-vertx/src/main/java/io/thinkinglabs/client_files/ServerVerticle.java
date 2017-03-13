@@ -5,7 +5,6 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerRequest;
-import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
@@ -51,7 +50,8 @@ public class ServerVerticle extends AbstractVerticle
     private void createClient(final RoutingContext routingContext)
     {
         final JsonObject bodyAsJson = routingContext.getBodyAsJson();
-        CreateClient createClient = new DefaultCreateClient(new PersistedClientBase(emf.createEntityManager(), new ToPersistedClientMapper()));
+        //TODO extract createClient as field
+        CreateClient createClient = new DefaultCreateClient(new PersistedClientBase(emf.createEntityManager(), new ToPersistedClientMapper()), new UUIDGenerator());
         Client client = createClient.createClient(new CreateClientCommand(bodyAsJson.getString("firstname"), bodyAsJson.getString("lastname")));
         routingContext.response()
                 .setStatusCode(201)

@@ -1,12 +1,12 @@
 package io.thinkinglabs.client_files.client;
 
+import io.thinkinglabs.client_files.UUIDGenerator;
 import org.webbitserver.*;
 
 import javax.persistence.EntityManagerFactory;
 
 /**
- * @author Thierry de Pauw
- * @since 24/01/2017
+ * @author @tdpauw
  */
 public class ClientHandler implements HttpHandler
 {
@@ -23,7 +23,7 @@ public class ClientHandler implements HttpHandler
     {
         if ("POST".equals(request.method()))
         {
-            final DefaultCreateClient createClient = new DefaultCreateClient(new PersistedClientBase(emf.createEntityManager(), new ToPersistedClientMapper()));
+            final DefaultCreateClient createClient = new DefaultCreateClient(new PersistedClientBase(emf.createEntityManager(), new ToPersistedClientMapper()), new UUIDGenerator());
             createClient.createClient(new CreateClientCommand("firstname", "lastname"));
         }
         else

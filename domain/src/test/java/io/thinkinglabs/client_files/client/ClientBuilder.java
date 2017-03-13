@@ -6,6 +6,7 @@ package io.thinkinglabs.client_files.client;
 public class ClientBuilder {
     private String firstname;
     private String lastname;
+    private String clientId;
 
     private ClientBuilder() {
         //do nothing
@@ -17,7 +18,13 @@ public class ClientBuilder {
 
 
     public static ClientBuilder scottYarrington() {
-        return aClient().withFirstname("Scott").withLastname("Yarrington");
+        return aClient().withClientId(ObjectMother.SCOTT_YARRINGTON_ID).withFirstname("Scott").withLastname("Yarrington");
+    }
+
+    public ClientBuilder withClientId(final String clientId)
+    {
+        this.clientId = clientId;
+        return this;
     }
 
     public ClientBuilder withFirstname(String firstname)
@@ -33,6 +40,7 @@ public class ClientBuilder {
     }
 
     public Client build() {
-        return Client.create(firstname, lastname);
+        return Client.create(clientId, firstname, lastname);
     }
+
 }
