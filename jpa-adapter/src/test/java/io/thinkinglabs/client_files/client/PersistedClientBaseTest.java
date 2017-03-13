@@ -10,7 +10,7 @@ import org.junit.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
-import static io.thinkinglabs.client_files.client.ClientBuilder.johnDoe;
+import static io.thinkinglabs.client_files.client.ClientBuilder.scottYarrington;
 
 public class PersistedClientBaseTest {
 
@@ -25,7 +25,7 @@ public class PersistedClientBaseTest {
     public void canAddClient() throws Exception {
         //TODO have a translator from domain Client to PersistedClient
         //PersistedClientBase takes a domain Client, translates it ot PersistedClient and saves
-        Client client = johnDoe().build();
+        Client client = scottYarrington().build();
 
         transactor.perform(() -> {
            sut.addClient(client);

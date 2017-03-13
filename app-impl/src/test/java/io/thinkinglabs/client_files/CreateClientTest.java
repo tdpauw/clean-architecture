@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static io.thinkinglabs.client_files.client.ClientBuilder.johnDoe;
+import static io.thinkinglabs.client_files.client.ClientBuilder.scottYarrington;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.refEq;
 import static org.mockito.Mockito.mock;
@@ -19,9 +19,9 @@ public class CreateClientTest {
 
 	@Test
 	public void createClient() {
-		Client client = sut.createClient(new CreateClientCommand("John", "Doe"));
+		Client client = sut.createClient(new CreateClientCommand("Scott", "Yarrington"));
 
-		Client expected = johnDoe().build();
+		Client expected = scottYarrington().build();
 		verify(clientBase).addClient(refEq(expected));
 		assertThat(client).isEqualToComparingFieldByField(expected);
 	}

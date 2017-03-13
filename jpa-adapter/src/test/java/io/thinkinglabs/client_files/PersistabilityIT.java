@@ -1,7 +1,6 @@
 package io.thinkinglabs.client_files;
 
 import io.thinkinglabs.*;
-import io.thinkinglabs.client_files.client.PersistedClientBuilder;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.hamcrest.beans.SamePropertyValuesAs;
 import org.junit.Rule;
@@ -14,7 +13,7 @@ import javax.persistence.PersistenceException;
 import java.util.Arrays;
 import java.util.List;
 
-import static io.thinkinglabs.client_files.client.PersistedClientBuilder.johnDoe;
+import static io.thinkinglabs.client_files.client.PersistedClientBuilder.scottYarrington;
 import static org.junit.Assert.assertThat;
 
 @Entity(name = "client")
@@ -27,7 +26,7 @@ public class PersistabilityIT {
 
     final List<? extends Builder<?>> persistentObjectBuilders =
             Arrays.asList(
-                    johnDoe()
+                    scottYarrington()
             );
 
 

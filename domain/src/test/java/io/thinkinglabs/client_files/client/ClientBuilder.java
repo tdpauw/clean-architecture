@@ -16,8 +16,8 @@ public class ClientBuilder {
     }
 
 
-    public static ClientBuilder johnDoe() {
-        return aClient().withFirstname("John").withLastname("Doe");
+    public static ClientBuilder scottYarrington() {
+        return aClient().withFirstname("Scott").withLastname("Yarrington");
     }
 
     public ClientBuilder withFirstname(String firstname)

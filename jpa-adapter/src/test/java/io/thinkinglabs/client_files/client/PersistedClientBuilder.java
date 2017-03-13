@@ -17,8 +17,8 @@ public class PersistedClientBuilder implements Builder<PersistedClient> {
         return new PersistedClientBuilder();
     }
 
-    public static PersistedClientBuilder johnDoe() {
-        return aClient().withFirstname("John").withLastname("Doe");
+    public static PersistedClientBuilder scottYarrington() {
+        return aClient().withFirstname("Scott").withLastname("Yarrington");
     }
 
     public PersistedClientBuilder withFirstname(String firstname)
