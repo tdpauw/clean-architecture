@@ -8,7 +8,6 @@
     <class>io.thinkinglabs.client_files.client.PersistedClient</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:psifiles;create=true"/>
       <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbc.JDBCDriver"/>
     </properties>
   </persistence-unit>

@@ -3,6 +3,7 @@ package io.thinkinglabs.client_files;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpClientRequest;
+import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
@@ -28,17 +29,20 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import static io.thinkinglabs.client_files.RegexMatcher.matches;
+import static io.thinkinglabs.client_files.VertxMatcherAssert.assertThat;
+import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.startsWith;
+
 /**
- * @author thipau
- * @since 30/01/2017
+ * @author @tdpauw
  */
 @RunWith(VertxUnitRunner.class)
 public class ServerVerticleTest
 {
-    //TODO use hsqldb with a file
-    //TODO do the Liquibase migration with plain old JDBC connection
+    //TODO use hsqldb with a file "jdbc:hsqldb:file:build/clean-architecture;create=true"
     //TODO pass Persistence Unit properties user, password, connection-url to the EntityManagerFactory using a Map
-    private final String connectionUrl = "jdbc:hsqldb:file:build/psifiles;create=true";
+    private final String connectionUrl = "jdbc:hsqldb:mem:clean-architecture;create=true";
 
     private Vertx vertx;
 
@@ -58,25 +62,30 @@ public class ServerVerticleTest
     }
 
     @After
-    public void tearDown(TestContext context) {
+    public void tearDown(TestContext context)
+    {
         vertx.close(context.asyncAssertSuccess());
     }
 
     @Test
-    public void testMyApplication(TestContext context) {
+    public void home(TestContext context)
+    {
         final Async async = context.async();
 
         vertx.createHttpClient().getNow(8080, "localhost", "/",
-                response -> {
-                    response.handler(body -> {
-                        context.assertEquals("<h1>Hello from my first Vert.x 3 application</h1>", body.toString());
+                response ->
+                {
+                    response.handler(body ->
+                    {
+                        context.assertEquals("<h1>It' working</h1>", body.toString());
                         async.complete();
                     });
                 });
     }
 
     @Test
-    public void createClient(TestContext context) {
+    public void createClient(TestContext context)
+    {
         final Async async = context.async();
 
         final HttpClientRequest request = vertx.createHttpClient().post(8080, "localhost", "/api/clients",
@@ -84,30 +93,38 @@ public class ServerVerticleTest
                 {
                     response.handler(body ->
                     {
+                        context.assertEquals(201, response.statusCode());
+                        // "^(https?)://([-a-zA-Z0-9.]+)(:[0-9]+)?/([-a-zA-Z0-9/]*)[-a-zA-Z0-9]+"
+                        assertThat(context, response.getHeader("Location"), matches("^http://localhost:8080/api/clients/[-a-zA-Z0-9]{4}"));
+                        context.assertEquals("application/json", response.getHeader("Content-Type"));
+
                         final JsonObject jsonObject = new JsonObject(body.toString());
                         context.assertEquals("John", jsonObject.getString("firstname"));
                         context.assertEquals("Doe", jsonObject.getString("lastname"));
+
                         async.complete();
                     });
                 });
 
         final String jsonObject = new JsonObject().put("firstname", "John").put("lastname", "Doe").encode();
         Buffer buffer = Buffer.buffer(jsonObject.getBytes(Charset.forName("UTF-8")));
-        request.putHeader("Content-Length", buffer.length() + "");
-        request.putHeader("Content-Type", "application/json");
+        request.putHeader(HttpHeaders.CONTENT_LENGTH, buffer.length() + "");
+        request.putHeader(HttpHeaders.CONTENT_TYPE, "application/json");
         request.write(buffer);
     }
 
     private void migrateDatabase(String connectionUrl) throws SQLException
     {
-        try {
+        try
+        {
             final Connection connection = DriverManager.getConnection(connectionUrl);
             Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
 
             Liquibase liquibase = new Liquibase("META-INF/liquibase/db-changelog.xml", new ClassLoaderResourceAccessor(), database);
 
             liquibase.update(new Contexts(), new LabelExpression());
-        } catch (LiquibaseException e) {
+        } catch (LiquibaseException e)
+        {
             throw new SQLException("Could not migrate database schema using Liquibase", e);
         } catch (SQLException e)
         {

@@ -3,6 +3,8 @@ package io.thinkinglabs.client_files;
 import io.thinkinglabs.client_files.client.*;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
+import io.vertx.core.http.HttpHeaders;
+import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
@@ -12,8 +14,7 @@ import io.vertx.ext.web.handler.BodyHandler;
 import javax.persistence.EntityManagerFactory;
 
 /**
- * @author thipau
- * @since 30/01/2017
+ * @author @tdpauw
  */
 public class ServerVerticle extends AbstractVerticle
 {
@@ -28,7 +29,7 @@ public class ServerVerticle extends AbstractVerticle
     public void start(final Future<Void> future) throws Exception
     {
         Router router = Router.router(vertx);
-        router.get("/").handler(this::hello);
+        router.get("/").handler(this::home);
         router.route("/api/clients/*").handler(BodyHandler.create());
         router.post("/api/clients").blockingHandler(this::createClient);
 
@@ -52,13 +53,22 @@ public class ServerVerticle extends AbstractVerticle
         final JsonObject bodyAsJson = routingContext.getBodyAsJson();
         CreateClient createClient = new DefaultCreateClient(new PersistedClientBase(emf.createEntityManager(), new ToPersistedClientMapper()));
         Client client = createClient.createClient(new CreateClientCommand(bodyAsJson.getString("firstname"), bodyAsJson.getString("lastname")));
-        routingContext.response().setStatusCode(201).end(new JsonObject().put("firstname", client.getFirstname()).put("lastname", client.getLastname()).encode());
+        routingContext.response()
+                .setStatusCode(201)
+                .putHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .putHeader(HttpHeaders.LOCATION, computeLocationHeader(routingContext.request(), "uuid"))
+                .end(new JsonObject().put("firstname", client.getFirstname()).put("lastname", client.getLastname()).encode());
     }
 
-    private void hello(RoutingContext routingContext)
+    private String computeLocationHeader(final HttpServerRequest request, final String id)
     {
-        HttpServerResponse response = routingContext.response();
-        response.putHeader("content-type", "text/html")
-                .end("<h1>Hello from my first Vert.x 3 application</h1>");
+        return request.absoluteURI() + "/" + id;
+    }
+
+    private void home(RoutingContext routingContext)
+    {
+        routingContext.response()
+                .putHeader(HttpHeaders.CONTENT_TYPE, "text/html")
+                .end("<h1>It' working</h1>");
     }
 }

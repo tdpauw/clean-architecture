@@ -23,8 +23,6 @@ public class PersistedClientBaseTest {
 
     @Test
     public void canAddClient() throws Exception {
-        //TODO have a translator from domain Client to PersistedClient
-        //PersistedClientBase takes a domain Client, translates it ot PersistedClient and saves
         Client client = scottYarrington().build();
 
         transactor.perform(() -> {
