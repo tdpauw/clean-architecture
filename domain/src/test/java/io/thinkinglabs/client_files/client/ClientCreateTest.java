@@ -7,7 +7,7 @@ public class ClientCreateTest {
 
     @Test
     public void createsValid() {
-        Client client = Client.create("lastname", "firstname");
+        Client client = Client.create("firstname", "lastname");
 
         SoftAssertions softly = new SoftAssertions();
         softly.assertThat(client.getFirstname()).isEqualTo("firstname");

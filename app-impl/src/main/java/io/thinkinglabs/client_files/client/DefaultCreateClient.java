@@ -10,7 +10,7 @@ public class DefaultCreateClient implements CreateClient {
 
     @Override
     public Client createClient(CreateClientCommand createClientCommand) {
-        Client client = Client.create(createClientCommand.getLastname(), createClientCommand.getFirstname());
+        Client client = Client.create(createClientCommand.getFirstname(), createClientCommand.getLastname());
         clientBase.addClient(client);
         return client;
     }

@@ -75,6 +75,7 @@ project(':infra-rest-vertx') {
     compile 'io.vertx:vertx-core:3.3.3'
     compile 'io.vertx:vertx-web:3.3.3'
     runtime 'org.hibernate:hibernate-core:5.2.3.Final'
+    testCompileOnly 'javax:javaee-web-api:7.0'
     testCompile 'io.vertx:vertx-unit:3.3.3'
     testCompile'org.liquibase:liquibase-core:3.5.0'
     testRuntime 'org.hsqldb:hsqldb:2.3.4'
