@@ -29,6 +29,6 @@ public class Client {
 
     public String getClientId()
     {
-        return "uuid";
+        return clientId;
     }
 }

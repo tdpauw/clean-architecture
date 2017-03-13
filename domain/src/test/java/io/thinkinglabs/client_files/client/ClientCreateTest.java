@@ -7,10 +7,10 @@ public class ClientCreateTest {
 
     @Test
     public void createsValid() {
-        Client client = Client.create("uuid", "firstname", "lastname");
+        Client client = Client.create("uuid-1234", "firstname", "lastname");
 
         SoftAssertions softly = new SoftAssertions();
-        softly.assertThat(client.getClientId()).isEqualTo("uuid");
+        softly.assertThat(client.getClientId()).isEqualTo("uuid-1234");
         softly.assertThat(client.getFirstname()).isEqualTo("firstname");
         softly.assertThat(client.getLastname()).isEqualTo("lastname");
         softly.assertAll();

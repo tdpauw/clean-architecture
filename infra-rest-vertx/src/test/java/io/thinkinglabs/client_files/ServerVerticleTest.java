@@ -95,7 +95,7 @@ public class ServerVerticleTest
                     {
                         context.assertEquals(201, response.statusCode());
                         // "^(https?)://([-a-zA-Z0-9.]+)(:[0-9]+)?/([-a-zA-Z0-9/]*)[-a-zA-Z0-9]+"
-                        assertThat(context, response.getHeader("Location"), matches("^http://localhost:8080/api/clients/[-a-zA-Z0-9]{4}"));
+                        assertThat(context, response.getHeader("Location"), matches("^http://localhost:8080/api/clients/[-a-zA-Z0-9]{36}"));
                         context.assertEquals("application/json", response.getHeader("Content-Type"));
 
                         final JsonObject jsonObject = new JsonObject(body.toString());
