@@ -1,5 +1,8 @@
 package io.thinkinglabs.client_files.client;
 
+/**
+ * @author @tdpauw
+ */
 public class ClientBuilder {
     private String firstname;
     private String lastname;
@@ -14,12 +17,18 @@ public class ClientBuilder {
 
 
     public static ClientBuilder johnDoe() {
-        return aClient().withDefaults();
+        return aClient().withFirstname("John").withLastname("Doe");
     }
 
-    public ClientBuilder withDefaults() {
-        this.firstname = "John";
-        this.lastname = "Doe";
+    public ClientBuilder withFirstname(String firstname)
+    {
+        this.firstname = firstname;
+        return this;
+    }
+
+    public ClientBuilder withLastname(String lastname)
+    {
+        this.lastname = lastname;
         return this;
     }
 

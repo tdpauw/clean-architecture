@@ -1,5 +1,8 @@
 package io.thinkinglabs.client_files.client;
 
+/**
+ * @author @tdpauw
+ */
 public class Client {
 
     private final String firstname;
