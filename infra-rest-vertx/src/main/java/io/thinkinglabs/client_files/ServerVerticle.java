@@ -56,7 +56,7 @@ public class ServerVerticle extends AbstractVerticle
         routingContext.response()
                 .setStatusCode(201)
                 .putHeader(HttpHeaders.CONTENT_TYPE, "application/json")
-                .putHeader(HttpHeaders.LOCATION, computeLocationHeader(routingContext.request(), "uuid"))
+                .putHeader(HttpHeaders.LOCATION, computeLocationHeader(routingContext.request(), client.getClientId()))
                 .end(new JsonObject().put("firstname", client.getFirstname()).put("lastname", client.getLastname()).encode());
     }
 

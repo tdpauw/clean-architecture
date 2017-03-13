@@ -24,4 +24,9 @@ public class Client {
     public String getLastname() {
         return lastname;
     }
+
+    public String getClientId()
+    {
+        return "uuid";
+    }
 }

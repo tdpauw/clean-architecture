@@ -10,6 +10,7 @@ public class ClientCreateTest {
         Client client = Client.create("firstname", "lastname");
 
         SoftAssertions softly = new SoftAssertions();
+        softly.assertThat(client.getClientId()).isEqualTo("uuid");
         softly.assertThat(client.getFirstname()).isEqualTo("firstname");
         softly.assertThat(client.getLastname()).isEqualTo("lastname");
         softly.assertAll();
