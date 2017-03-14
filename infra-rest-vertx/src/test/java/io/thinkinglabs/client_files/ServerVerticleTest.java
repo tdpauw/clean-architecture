@@ -1,5 +1,8 @@
 package io.thinkinglabs.client_files;
 
+import io.thinkinglabs.client_files.client.DefaultCreateClient;
+import io.thinkinglabs.client_files.client.PersistedClientBase;
+import io.thinkinglabs.client_files.client.ToPersistedClientMapper;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpClientRequest;
@@ -31,8 +34,6 @@ import java.util.HashMap;
 
 import static io.thinkinglabs.client_files.RegexMatcher.matches;
 import static io.thinkinglabs.client_files.VertxMatcherAssert.assertThat;
-import static org.hamcrest.Matchers.endsWith;
-import static org.hamcrest.Matchers.startsWith;
 
 /**
  * @author @tdpauw
@@ -57,7 +58,9 @@ public class ServerVerticleTest
 
         vertx = Vertx.vertx();
         vertx.deployVerticle(
-                new ServerVerticle(entityManagerFactory),
+                new ServerVerticle(
+                        new DefaultCreateClient(
+                                new PersistedClientBase(entityManagerFactory.createEntityManager(), new ToPersistedClientMapper()), new UUIDGenerator())),
                 context.asyncAssertSuccess());
     }
 

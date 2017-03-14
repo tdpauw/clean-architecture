@@ -10,18 +10,16 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 
-import javax.persistence.EntityManagerFactory;
-
 /**
  * @author @tdpauw
  */
 public class ServerVerticle extends AbstractVerticle
 {
-    private final EntityManagerFactory emf;
+    private final CreateClient createClient;
 
-    public ServerVerticle(final EntityManagerFactory emf)
+    public ServerVerticle(final DefaultCreateClient createClient)
     {
-        this.emf = emf;
+        this.createClient = createClient;
     }
 
     @Override
@@ -50,8 +48,6 @@ public class ServerVerticle extends AbstractVerticle
     private void createClient(final RoutingContext routingContext)
     {
         final JsonObject bodyAsJson = routingContext.getBodyAsJson();
-        //TODO extract createClient as field
-        CreateClient createClient = new DefaultCreateClient(new PersistedClientBase(emf.createEntityManager(), new ToPersistedClientMapper()), new UUIDGenerator());
         Client client = createClient.createClient(new CreateClientCommand(bodyAsJson.getString("firstname"), bodyAsJson.getString("lastname")));
         routingContext.response()
                 .setStatusCode(201)
