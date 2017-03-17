@@ -80,7 +80,7 @@ public class ServerVerticleTest
                 {
                     response.handler(body ->
                     {
-                        context.assertEquals("<h1>It' working</h1>", body.toString());
+                        context.assertEquals("<h1>It's working</h1>", body.toString());
                         async.complete();
                     });
                 });

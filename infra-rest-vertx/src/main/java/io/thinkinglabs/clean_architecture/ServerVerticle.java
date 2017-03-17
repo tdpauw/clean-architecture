@@ -68,6 +68,6 @@ public class ServerVerticle extends AbstractVerticle
     {
         routingContext.response()
                 .putHeader(HttpHeaders.CONTENT_TYPE, "text/html")
-                .end("<h1>It' working</h1>");
+                .end("<h1>It's working</h1>");
     }
 }
