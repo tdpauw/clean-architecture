@@ -7,7 +7,7 @@
 
   <changeSet id="create-client" author="Thierry dP">
     <createTable tableName="client">
-      <column name="id" type="char(36)">
+      <column name="id" type="numeric(19,0)">
         <constraints primaryKey="true"/>
       </column>
       <column name="firstname" type="varchar(50)"/>
@@ -16,5 +16,10 @@
   </changeSet>
   <changeSet id="create-client-sequence" author="Thierry dP">
     <createSequence sequenceName="client_seq" incrementBy="50" cycle="false" startValue="50"/>
+  </changeSet>
+  <changeSet id="create-client-add-client_id" author="Thierry dP">
+    <addColumn tableName="client">
+      <column name="clientId" type="char(36)" />
+    </addColumn>
   </changeSet>
 </databaseChangeLog>

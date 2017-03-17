@@ -10,6 +10,7 @@ public class ToPersistedClientMapperTest
 
     @Test
     public void fromDomainToPersistentObject() {
-        assertThat(sut.from(ClientBuilder.scottYarrington().build())).isEqualToComparingFieldByField(PersistedClientBuilder.scottYarrington().build());
+        assertThat(sut.from(ClientBuilder.scottYarrington().build()))
+                .isEqualToComparingFieldByField(PersistedClientBuilder.scottYarrington().build());
     }
 }

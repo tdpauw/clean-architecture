@@ -2,12 +2,15 @@ package io.thinkinglabs.client_files.client;
 
 import io.thinkinglabs.Builder;
 
+import static io.thinkinglabs.client_files.client.ObjectMother.SCOTT_YARRINGTON_ID;
+
 /**
  * @author @tdpauw
  */
 public class PersistedClientBuilder implements Builder<PersistedClient> {
     private String firstname;
     private String lastname;
+    private String clientId;
 
     private PersistedClientBuilder() {
         //do nothing
@@ -18,7 +21,13 @@ public class PersistedClientBuilder implements Builder<PersistedClient> {
     }
 
     public static PersistedClientBuilder scottYarrington() {
-        return aClient().withFirstname("Scott").withLastname("Yarrington");
+        return aClient().withClientId(SCOTT_YARRINGTON_ID).withFirstname("Scott").withLastname("Yarrington");
+    }
+
+    private PersistedClientBuilder withClientId(final String clientId)
+    {
+        this.clientId = clientId;
+        return this;
     }
 
     public PersistedClientBuilder withFirstname(String firstname)
@@ -35,6 +44,6 @@ public class PersistedClientBuilder implements Builder<PersistedClient> {
 
     @Override
     public PersistedClient build() {
-        return new PersistedClient(firstname, lastname);
+        return new PersistedClient(clientId, firstname, lastname);
     }
 }
