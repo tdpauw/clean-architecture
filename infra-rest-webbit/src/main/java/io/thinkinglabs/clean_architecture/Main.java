@@ -15,7 +15,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("client_files");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("clean_architecture");
         WebServer webServer = new NettyWebServer(8080);
         webServer.add("/api/client", new ClientHandler(emf));
     }
